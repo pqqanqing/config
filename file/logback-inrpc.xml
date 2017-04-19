@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<configuration>
+    <property name="LOG_HOME" value="/Users/panqingqing/logs"/>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/file/file-inrpc-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--如果maxHistory设置为30，那么超过30天的log文件会被自动删除。-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <!-- 下面配置一些第三方包的日志过滤级别，用于避免刷屏 -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="com.opensymphony" level="INFO"/>
+    <logger name="org.apache" level="INFO"/>
+    <logger name="org.quartz" level="INFO"/>
+    <logger name="org.dozer" level="INFO"/>
+
+    <logger name="java.sql" level="debug"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="TRACE"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG"/>
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>
+
+    <!-- 会向上传递,传给root,root会纪录文件和打印控制台 -->
+    <logger name="com.wjs.file"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="file"/>
+    </root>
+
+</configuration>
