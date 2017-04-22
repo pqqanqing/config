@@ -35,7 +35,7 @@
     <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG"/>
 
     <!-- 会向上传递,传给root,root会纪录文件和打印控制台 -->
-    <logger name="com.wjs"/>
+    <logger name="com.wjs.file"/>
 
     <root level="DEBUG">
         <appender-ref ref="stdout"/>
